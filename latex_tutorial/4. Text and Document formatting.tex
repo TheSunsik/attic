@@ -1,0 +1,59 @@
+\documentclass[11pt]{article}
+
+\begin{document}
+\title{This is title section}
+\author{Sunsik Kim}
+\date{\today}
+\maketitle
+Above command creates necessary information as specified above. We can exclude
+some of them, but can't exclude maketitle command; if so, title part isn't
+generated.
+
+\tableofcontents
+Since we specified sections and subsections below, this command will build table
+of contents accordingly. Note that we need to execute quick build twice to properly
+return the desired table of contents.
+
+This will produce \textit{italicized} text. 
+This will produce \textbf{bold-faced} text.
+This will produce \textsc{small caps} text. That is, this returns upper case
+letters in the size of lower case letters.
+This will produce \texttt{typewriter} font. This a font used in R markdown code
+chunk.
+
+Increase fontsize 
+\begin{large} like this \end{large}. 
+For larger fontsize, use 
+\begin{LARGE} this \end{LARGE} or 
+\begin{huge} this \end{huge} or 
+\begin{Huge} this \end{Huge}.
+
+In case we want to decrease the fontsize, use 
+\begin{small} this \end{small} or 
+\begin{tiny} this \end{tiny}.
+
+\begin{center}
+To center certain part of the text, use this.
+\end{center}
+
+\begin{flushleft}
+To align certain part of the text to the left, use this.
+\end{flushleft}
+
+\begin{flushright}
+To align certain part of the text to the right, use this.
+\end{flushright}
+
+\section{Linear Functions}
+This is reserved layout for specifying certain chapter.
+	\subsection{Slope-Intercept From}
+	This is also a reserved layout.
+	\subsection{Standard Form}
+	Numbering will be automatically handled by the compiler.
+	\subsection{Point-Slope Form}
+\section{Quadratic Functions}
+	\subsection{Vertex Form}
+	\subsection{Standard Form}
+	\subsection{Factored Form}
+
+\end{document}
