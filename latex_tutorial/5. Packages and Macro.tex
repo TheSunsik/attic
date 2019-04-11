@@ -1,0 +1,52 @@
+\documentclass[11pt]{article}
+
+\usepackage{fullpage}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\def\eq1{y=\frac{x}{3x^2+x+1}}
+
+\begin{document}
+We can add extra functionality to Texmaker using some packages. They include:
+
+\begin{itemize}
+fullpage, geometry : setting page layout(controlling page margin)
+amsfonts : change letter into special form(ex. set of natural numbers)
+graphicx : insert image into the document
+\end{itemize}
+
+We write command that includes package in preamble(space between documentclass command
+and begin document command) using "usepackage" command. Insert the name of the package
+in curly bracket, and insert some options in square bracket, if necessary. For example,
+code above load fullpage package. This package set margin automatically and gives tidy 
+paper layout. 
+
+If we want to manually specify the size of the margin, we load "geometry" package. We 
+can specify certain options like following:
+
+usepackage[top=1cm, bottom=1cm, left=0.5cm, right=0.5cm]{geometry}\\
+usepackage[margin=1cm, paperwidth=8cm, paperheight=11cm]{geometry}
+
+"amsfonts" package is used to insert symbols that are mainly used to specify certain set.
+For example, we can include sign for the set of natural numbers like $\mathbb{N}$, given
+that we've loaded amsfonts package.
+
+"graphicsx" package gives functionality that enable user to include image that is in
+the same directory with current .tex file. Note that only png, jpg, gif, pdf file can
+be included, and space in file name is forbidden. We include image as such:
+\begin{center}
+\includegraphics[width=5in, height=8in]{filename.extension}
+\end{center}
+
+We can also include graphic in its original weight-height proportion. We specify scale
+value to scale down/up a input image.
+\includegraphics[scale=0.5]{filename.extension}
+
+We can also rotate image if we specify angle:
+\includegraphics[angle=45]{filename.extension}
+
+Macro is used to build custom LaTeX command. It is useful when we need to type in same
+expression many times in a document. By "def" command and macro's name, we can define 
+that name to designate certain text. For example, we define a macro named as 'eq1' above.
+Then we can use this macro like \eq1 or $\eq1$(if we want to include this in math mode).
+
+\end{document}
