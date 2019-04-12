@@ -1,0 +1,50 @@
+\documentclass[11pt]{article}
+
+\begin{document}
+Curly brackets are reserved symbol, so we need backslash to display this symbol to
+the pdf. This is true for any other reserved symbols.
+$$\{curly\ brackets\}$$
+$$\$dollar\ sign\$$$\\
+
+To extend wrapper to match a height of an object, we need "left" or "right". For
+example, if we want to write Jacobian of univariable pdf transformation, we would
+want to extend vertical bar in the expression:
+$$|\frac{dx}{dy}|$$
+
+in order to express this symbol in the form of:
+$$\left| \frac{dx}{dy} \right|$$
+
+However, sometimes we might not need the left bar when we want to express derivative of
+$y=f(x)$ evaluated at $x=x_{0}$. Then make use of reserved symbol period:
+$$\left. \frac{dy}{dx} \right|_{x=x_{0}}$$
+
+Now we will build table. At the second curly bracket, we type the form of alignment 
+in desired number of times. If we want six columns to be aligned center, we type:
+\begin{tabular}{cccccc}
+$x$ & 1 & 2 & 3 & 4 & 5 \\
+$f(x)$ & 3 & 5 & 7 & 9 & 11
+\end{tabular}
+
+Note that we move to next column entry by writing ampersand and move to next row
+by writing double backslash. Moreover, if we want to add a horizontal line between
+rows or add vertical line between columns, we perform:
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & 1 & 2 & 3 & 4 & 5 \\ \hline
+$f(x)$ & 3 & 5 & 7 & 9 & 11 \\ \hline
+\end{tabular}
+
+Now we make array by begin equationarray(eqnarray). Note that (1)math mode is
+automatically set in eqnarray chunk; we don't need to specify dollar sign. Also
+(2)we change line by writing double backslashes, and designate aligner by wrapping
+the symbol to use as aligner with ampersand. Finally, (3)to hide line numbers that
+is attached as default, we attach asterisk like below:
+\begin{eqnarray*}
+5x^2-9&=&x+3\\
+4x^2&=&12\\
+x^2&=&3\\
+x&\approx&\pm1.732
+\end{eqnarray*}
+
+
+\end{document}

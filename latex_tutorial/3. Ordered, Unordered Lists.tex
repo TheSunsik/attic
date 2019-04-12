@@ -1,0 +1,51 @@
+\documentclass[11pt]{article}
+
+\begin{document}
+
+To make an ordered list with numbers attached:
+\begin{enumerate}
+\item pencil
+\item calculator
+\item ruler
+\item notebook
+\item graph paper
+\end{enumerate}
+
+To make an nested list with numbers attached, run following code. Note that added
+tab key in front of the code for sublist is optional; it's just added to make code
+look tidier(to distinguish parent, child list apparently).
+\begin{enumerate}
+\item notebook
+	\begin{enumerate}
+	\item Math
+		\begin{enumerate}
+		\item Analysis
+		\item Matrix Algebra
+		\end{enumerate}
+	\item Literature
+	\item Science
+	\end{enumerate}
+\item graph paper
+\end{enumerate}
+Mixture of two types of lists is also possible.
+
+To make an unordered list, execute:
+\begin{itemize}
+\item notebook
+	\begin{enumerate}
+	\item Math
+	\item Literature
+	\item Science
+	\end{enumerate}
+\item graph paper
+\item calculator
+\end{itemize}
+
+To specify a symbol used in lists, use square brackets like:
+\begin{enumerate}
+\item[Commutative] $a+b=b+a$
+\item[Associative] $a+(b+c)=(a+b)+c$
+\item[Distributive] $a(b+c)=ab+ac$
+\end{enumerate}
+
+\end{document}
