@@ -1,0 +1,106 @@
+\documentclass[10pt]{beamer}
+
+%% basic metropolis theme setting
+\usetheme[progressbar=frametitle]{metropolis}
+%In using metropolis theme, we can add progressbar like this.
+\setbeamertemplate{frame numbering}[fraction]
+\useoutertheme{metropolis}
+\useinnertheme{metropolis}
+\usefonttheme{metropolis}
+\usecolortheme{spruce}
+\setbeamercolor{background canvas}{bg=white}
+%%%%%
+
+\title{Bayesian Functional Data Modelling for Heterogeneous Volatility}
+\subtitle{On Stochastic Volatility Regression}
+\author{\large{\textbf{Sunsik Kim}}}
+%\institute{we can use this space to \\[6pt]\textbf{display other information}}
+\date{}
+
+%%% Define frequently used expressions
+\def\mean{M_{k_i}(t)}
+\def\dev{U_i(t)}
+\def\vol{\sigma_{U_i}^2}
+%%%%%
+
+\usepackage{amsfonts}
+
+\begin{document}
+\metroset{block=fill}
+\maketitle
+
+
+\begin{frame}[t]{Why SVR}
+\vspace{4pt}
+\begin{itemize}
+\item In FDA literature, variability among volatilities between individual functions has been somewhat neglected, even though such variability might contain important information.
+\item To include the effect of individual variability, novel class of functional data analysis models characterized using hierarchical stochastic differential equations is presented in this paper.
+\end{itemize}
+\end{frame}
+
+
+\section{Model Specification}
+\begin{frame}[t]{Observation equation}
+\vspace{4pt}
+We specify an observation equation for $Y_i(t)$ as:
+\begin{center}
+$Y_i(t)=\mean+\dev+\varepsilon_i(t)$
+\end{center}
+\begin{itemize}
+\item $\varepsilon_i(t)$ : measurement error at time $t$(follows $N(0,\sigma^{2}_{\varepsilon})$)
+\item $\mean$ : Value of $k_i$th group mean function at time $t$\\
+(calculated as $E\{Y_i(t)|M_{k_i}(t)\}$)
+% I think it should be $E\{Y_i(t)|k_i, t\}$ but let's pass for now
+\item $\dev$ : Subject-specific deviation from the group mean at time $t$\\
+(individual volatility $\vol$ is defined using this deviation function)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[t]{Volatility}
+\vspace{4pt}
+\begin{block}{Volatility}
+\vspace{0.5em}
+With defferential operator $D^q=\displaystyle\frac{d^q}{dt^q}$, we denote\\
+$$\vol=\lim\limits_{h \to 0}\displaystyle\frac{1}{h}E[\{D^{q-1}U_i(t+h)-D^{q-1}\dev\}^2|D^{q-1}\dev]$$
+\vspace{0.5em}
+\end{block}
+The volatility $\vol$ is allowed to vary through simple Gaussian log linear model(i.e. $log(\vol)\sim N_1(x_{i}^{T}\beta,\sigma^2)$). This implies that \textbf{volatility}
+\begin{enumerate}
+\item is \textbf{constant over time}(doesn't rely on $t$)
+\item \textbf{varies across subjects}(indexed by $i$, which refer to individual observation)
+\item \textbf{depends on covariates}(relies on $x_i$)
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}[t]{Priors for mean, deviance function}
+\vspace{4pt}
+Gaussian process priors for mean and deviance function is specified by using \textbf{stochastic differential equations} as following:
+\begin{center}
+    $D^pM_{k_i}(t)=\sigma_{M_{K_i}}\dot{W}_{k_i}(t)$\\
+    $D^qU_i(t)=\sigma_{U_i}\dot{W}_{i}^{'}(t)$
+\end{center}
+Note that $p, q \in \mathbb{N}$\ and\  $\sigma_{M_{k_i}}, \sigma_{U_i} \in \mathbb{R}^+$ where $\sigma_{M_{k_i}}, \sigma_{U_i}$ refer to group and individual volatility respectively. Also, $\dot{W}_{k_i}(t)$ and $\dot{W}_{i}^{'}(t)$ are independent Gaussian white noise process with
+\begin{center}
+    $E\{\dot{W}_{k_i}(t)\}=E\{\dot{W}_{i}^{'}(t)\}=0$\\
+    $E\{\dot{W}_{k_i}(t)\dot{W}_{k_i}(t^{'})\}=E\{\dot{W}_{i}^{'}(t)\dot{W}_{i}^{'}(t^{'})\}=\delta(t-t^{'})$
+\end{center}
+\end{frame}
+
+
+\begin{frame}[t]{Priors for mean, deviance function}
+\vspace{4pt}
+Accordingly, mean and covariance functions of $\mean$ and $\dev$ is obtained by applying \textbf{stochastic integration} to stochastic differential equations. Such process result in hierarchical Gaussian process of:
+\begin{align*}
+\mean +\dev | & \mean \sim GP(\mean , K_{U_{i0}}(s,t)+K_{U_{i1}}(s,t)),\\
+	& \mean \sim GP(0 , K_{M_{k_{i}0}}(s,t)+K_{M_{k_{i}1}}(s,t))
+\end{align*}
+\end{frame}
+
+\begin{frame}[standout]
+\flushleft
+Thank you
+\end{frame}
+
+\end{document}
