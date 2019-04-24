@@ -24,6 +24,9 @@
 %%%%%
 
 \usepackage{amsfonts}
+%\usepackage{mathrsfs}
+%Load this package if you need really cursive-formal letter
+%Use with \mathscr command
 
 \begin{document}
 \metroset{block=fill}
@@ -91,12 +94,36 @@ Note that $p, q \in \mathbb{N}$\ and\  $\sigma_{M_{k_i}}, \sigma_{U_i} \in \math
 
 \begin{frame}[t]{Priors for mean, deviance function}
 \vspace{4pt}
-Accordingly, mean and covariance functions of $\mean$ and $\dev$ is obtained by applying \textbf{stochastic integration} to stochastic differential equations. Such process result in hierarchical Gaussian process of:
+Accordingly, mean and covariance functions of $\mean$ and $\dev$ is obtained by applying \textbf{stochastic integration} to stochastic differential equations. Such process result in hierarchical Gaussian process of
 \begin{align*}
 \mean +\dev | & \mean \sim GP(\mean , K_{U_{i0}}(s,t)+K_{U_{i1}}(s,t)),\\
 	& \mean \sim GP(0 , K_{M_{k_{i}0}}(s,t)+K_{M_{k_{i}1}}(s,t))
 \end{align*}
+where each covariance function is composed as
+\begin{align*}
+K_{U_{i0}}(s,t)+K_{U_{i1}}(s,t)& =\sigma^{2}_{U_0}\mathcal{R}_{U_0}(s,t)+\sigma^{2}_{U_i}\mathcal{R}_{U_1}(s,t)\\
+K_{M_{k_{i}0}}(s,t)+K_{M_{k_{i}1}}(s,t)& =\sigma^{2}_{M_0}\mathcal{R}_{M_0}(s,t)+\sigma^{2}_{M_{k_i}}\mathcal{R}_{M_1}(s,t).
+\end{align*}
+Note that covariance function of obtained Gaussian Process depends on covariates of specific individuals through $\sigma^{2}_{U_i}$ whose log value follows $N(x_{i}^{T}\beta, \sigma_{\varepsilon})$ distribution.
 \end{frame}
+
+
+\begin{frame}[t]{Priors for mean, deviance function}
+\vspace{4pt}
+Specific form of components in covariance functions presented in previous slide is presented as below:
+\begin{align*}
+\mathcal{R}_{U_0}(s,t)=\sum_{l=0}^{q-1}\phi_{l}(s)\phi_{l}(t),\ \mathcal{R}_{U_1}(s,t)=\int_{\tau}G_q(s,u)G_q(t,u)\ du\\
+\mathcal{R}_{M_0}(s,t)=\sum_{l=0}^{p-1}\phi_{l}(s)\phi_{l}(t),\ \mathcal{R}_{M_1}(s,t)=\int_{\tau}G_p(s,u)G_p(t,u)\ du
+\end{align*}
+where $\displaystyle\phi_l(t)=\frac{t^l}{l!},\ G_k(x,u)=\frac{(x-u)^{k-1}}{(k-1)!}\ and\ s,t,u \in \tau$
+\end{frame}
+
+
+\begin{frame}[t]{Posterior mean if mean, deviance function}
+\vspace{4pt}
+
+\end{frame}
+
 
 \begin{frame}[standout]
 \flushleft
