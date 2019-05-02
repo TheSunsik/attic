@@ -51,9 +51,7 @@ $Y_i(t)=\mean+\dev+\varepsilon_i(t)$
 \end{center}
 \begin{itemize}
 \item $\varepsilon_i(t)$ : measurement error at time $t$(follows $N(0,\sigma^{2}_{\varepsilon})$)
-\item $\mean$ : Value of $k_i$th group mean function at time $t$\\
-(calculated as $E\{Y_i(t)|M_{k_i}(t)\}$)
-% I think it should be $E\{Y_i(t)|k_i, t\}$ but let's pass for now
+\item $\mean$ : Value of $k_i$th group mean function at time $t$
 \item $\dev$ : Subject-specific deviation from the group mean at time $t$\\
 (individual volatility $\vol$ is defined using this deviation function)
 \end{itemize}
@@ -84,7 +82,7 @@ Gaussian process priors for mean and deviance function is specified by using \te
     $D^pM_{k_i}(t)=\sigma_{M_{K_i}}\dot{W}_{k_i}(t)$\\
     $D^qU_i(t)=\sigma_{U_i}\dot{W}_{i}^{'}(t)$
 \end{center}
-Note that $p, q \in \mathbb{N}$\ and\  $\sigma_{M_{k_i}}, \sigma_{U_i} \in \mathbb{R}^+$ where $\sigma_{M_{k_i}}, \sigma_{U_i}$ refer to group and individual volatility respectively. Also, $\dot{W}_{k_i}(t)$ and $\dot{W}_{i}^{'}(t)$ are independent Gaussian white noise process with
+where $\dot{W}_{k_i}(t)$, $\dot{W}_{i}^{'}(t)$ are independent Gaussian white noise process with
 \begin{center}
     $E\{\dot{W}_{k_i}(t)\}=E\{\dot{W}_{i}^{'}(t)\}=0$\\
     $E\{\dot{W}_{k_i}(t)\dot{W}_{k_i}(t^{'})\}=E\{\dot{W}_{i}^{'}(t)\dot{W}_{i}^{'}(t^{'})\}=\delta(t-t^{'})$
@@ -104,24 +102,51 @@ where each covariance function is composed as
 K_{U_{i0}}(s,t)+K_{U_{i1}}(s,t)& =\sigma^{2}_{U_0}\mathcal{R}_{U_0}(s,t)+\sigma^{2}_{U_i}\mathcal{R}_{U_1}(s,t)\\
 K_{M_{k_{i}0}}(s,t)+K_{M_{k_{i}1}}(s,t)& =\sigma^{2}_{M_0}\mathcal{R}_{M_0}(s,t)+\sigma^{2}_{M_{k_i}}\mathcal{R}_{M_1}(s,t).
 \end{align*}
-Note that covariance function of obtained Gaussian Process depends on covariates of specific individuals through $\sigma^{2}_{U_i}$ whose log value follows $N(x_{i}^{T}\beta, \sigma_{\varepsilon})$ distribution.
+\end{frame}
+
+\begin{frame}[t]{Prior for mean, deviance function}
+\vspace{4pt}
+Further specification follows:\\
+\begin{itemize}
+\item 
+Initial values of $\mean$ and $\dev$ upto p-1 and q-1 orders denoted as $\textbf{M}_{{k_i}0}=\{M_{k_i}(0),...,D^{p-1}M_{k_i}(0)\}$ and $\textbf{U}_{i0}=\{U_i(0),...,D^{p-1}U_i\}$ follow multivariate Gaussian distribution. That is:
+\begin{center}
+$\textbf{M}_{{k_i}0}\sim N_p(0,\sigma^2_{M_0}\mathit{I}),\ \textbf{U}_{i0}\sim N_q(0, \sigma^2_{U_0}I)$
+\end{center}
+\item Other parameters follows distribution according to the setting below:\\
+\begin{center}
+$\sigma_{\varepsilon}^2\sim invGa(a,b),\ \sigma_{U_0}^2\sim invGa(a,b)$\\
+$\sigma_{M_{k_i}}^2\sim invGa(a,b),\ log(\sigma_{U_i}^2)\sim N(x_i^T\beta, \sigma^2)$\\
+$f(\beta, \sigma^2)\propto 1/\sigma^2$
+\end{center}
+\item Note that $\sigma_{M_0}^2$ is set to arbitrarily big value; in this paper, $10^4$.
+\end{itemize}
 \end{frame}
 
 
-\begin{frame}[t]{Priors for mean, deviance function}
+\section{MCMC : Posterior calculation}
+\begin{frame}[t]{Objective}
 \vspace{4pt}
-Specific form of components in covariance functions presented in previous slide is presented as below:
-\begin{align*}
-\mathcal{R}_{U_0}(s,t)=\sum_{l=0}^{q-1}\phi_{l}(s)\phi_{l}(t),\ \mathcal{R}_{U_1}(s,t)=\int_{\tau}G_q(s,u)G_q(t,u)\ du\\
-\mathcal{R}_{M_0}(s,t)=\sum_{l=0}^{p-1}\phi_{l}(s)\phi_{l}(t),\ \mathcal{R}_{M_1}(s,t)=\int_{\tau}G_p(s,u)G_p(t,u)\ du
-\end{align*}
-where $\displaystyle\phi_l(t)=\frac{t^l}{l!},\ G_k(x,u)=\frac{(x-u)^{k-1}}{(k-1)!}\ and\ s,t,u \in \tau$
+Obtain smoothing spline estimate of each trajectories
+\begin{itemize}
+\item Smoothing spline estimate is a Bayes estimate under an integrated Wiener process prior.
+\item Since our prior is defined in terms of differential equations
+\begin{center}
+    $D^pM_{k_i}(t)=\sigma_{M_{K_i}}\dot{W}_{k_i}(t)$\\
+    $D^qU_i(t)=\sigma_{U_i}\dot{W}_{i}^{'}(t)$
+\end{center}
+where $\dot{W}_{k_i}(t)$, $\dot{W}_{i}^{'}(t)$ are independent Gaussian white noise process, $\mean, \dev$ is Wiener process.
+\item Thus, we can obtain smoothing spline estimate by Bayesian inference.
+\end{itemize}
 \end{frame}
 
 
-\begin{frame}[t]{Posterior mean if mean, deviance function}
+\begin{frame}[t]{Example using simulation}
 \vspace{4pt}
-
+Generate 100 trajectories having 20 timestamps each, with its length constant as 0.2. For more general setting, 20\% of the data are randomly erased.
+\begin{center}
+\includegraphics[scale=0.6]{simulated_data.png}
+\end{center}
 \end{frame}
 
 
