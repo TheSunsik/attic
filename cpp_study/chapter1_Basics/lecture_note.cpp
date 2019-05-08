@@ -1,6 +1,8 @@
 #include <iostream>		// Load iostream "library"
 #include "Header.h"		// Header contains declarations of many "names", therefore introduces them into the current scope.
 
+#define MY_FRUIT "Apple" // Defined a preprocessor(a.k.a macro) MY_FRUIT as "Apple".
+
 int addint(int num_a, int num_b); // forward "declaration". Usually included in header files.
 
 int addint(int num_a, int num_b)
@@ -22,7 +24,7 @@ void printHelloWorld()
 int main()
 {
 	using namespace std;	// Use functionalities defined in the "namespace" std without referencing it.
-							// Actually, namespace std is defined in iostream library.
+							// It is better to include this statement inside certain function.
 
 	/* To declare a variable is to assign a space somewhere in the memory.
 		For example, executing the "statement" "int x = 2" means:
@@ -43,8 +45,12 @@ int main()
 	extreme::printHelloWorld();	   // Also, the namespace 'extreme' is not defined or declared in current script, but declared in header
 								   // That is, to use names that are defined in other script, include header that declares those names.
 	printHelloWorld();			   // This returns normal Hello world. 
-								   // That is, to avoid ambiguous call, use namespace to specify which name to call
+								   // That is, to avoid ambiguous call, use namespace to specify which name to call.
 
+	cout << MY_FRUIT << endl;		// This returns predefined literal, "Apple".
+	getMyFruit();				    // NOTE : This returns ""MY_FRUIT is not defined".
+									// This shows that the effect of a macro is restricted to the script where the macro is defined.
+									// Unless macro is defined in the header, above sentence holds true.
 	return 0;
 }
 
