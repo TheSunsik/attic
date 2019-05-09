@@ -21,7 +21,7 @@ int main() {
 		}
 		else if (input == 'f')
 		{
-			study_float();
+			return 0;
 		}
 	}
 	

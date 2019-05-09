@@ -1,7 +1,7 @@
-#Basics
+# Basics
 n개의 C++ script가 compile되어 n개의 object file들을 만들고, 그 object file들이 linking되어 하나의 executable file을 build한다. 이 강좌에서는 의도에 맞는 프로그램을 만들 수 있도록 C++ script를 작성하는 법을 다룬다.
 
-##Basic Vocabulary
+## Basic Vocabulary
 <ul>
 <li>Declaration vs Definition<br>
 Declaration은 compiler에게 변수의 정보를 주는 행위로, 메모리 상의 어떤 공간에 이 형태의 정보를 담을건데, 그 공간을 이런 이름으로 부르겠다는 의미다. Definition을 통해 그 공간에 실질적으로 어떤 정보가 할당된다(사실 R이나 Python에서는 쉽게 구분되지 않는 개념). 변수를 선언하면서 정의하면 이를 '변수를 초기화한다'라고 한다.</li>
@@ -13,7 +13,7 @@ Declaration은 compiler에게 변수의 정보를 주는 행위로, 메모리 상의 어떤 공간에 이
 이건 명확히 구분되는 개념인데, C++에서는 삼항 연산자가 있는게 특이해서 따로 언급했다. R의 ifelse함수 기능을 하는 연산자인데, "자료형태 변수이름 = (조건문) ? 참 : 거짓;"의 형태로 사용한다.</li>
 </ul>
 
-##Header Files
+## Header Files
 개발에 필요한 모든 함수들을 하나의 script에 몰아서 정의하는 것은 협업을 위해서든, 차후의 가독성을 위해서든 좋은 습관은 아니다. 따라서 비슷한 기능을 하는 함수들을 여러 script로 나눠서 정의하는 작업이 필요한데, 이를 위해 Header 파일이 사용된다. Header를 include시켜서 다른 script에 있는 name들을 불러올 수 있기 때문이다.<br>
 다른 script상에서 정의된 함수나 객체들이 어떤 script에서 필요할 때, 필요한 이름들을 Header 파일에 선언해주고 그 Header 파일을 #include "Header.h"와 같은 방식으로 불러오면 된다.<br>
 이때 Header 파일을 생성하면 #pragma once라는 문구가 자동으로 삽입되는데, 이는 한 name이 중복되어 선언되는 것을 방지해준다. 헤더 가드라고 부른다.
