@@ -8,7 +8,7 @@ int main() {
 	while (true)
 	{
 		cout << "Which data type do you want to study?" << 
-			"\ninteger(i) / float(f) / quit(q)" << endl << 
+			"\ninteger(i) / float(f) / char(c) /  / quit(q)" << endl << 
 			"input : ";
 		cin >> input;
 		if (input == 'q')
@@ -21,7 +21,7 @@ int main() {
 		}
 		else if (input == 'f')
 		{
-			return 0;
+			study_float();
 		}
 	}
 	
