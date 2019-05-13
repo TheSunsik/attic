@@ -15,7 +15,11 @@ void study_bitwise()
 		
 		"\n\n - Decimal → Binary : bitset library를 이용" <<
 		"\n   ex. std::bitset<5>(18)은 10010을 반환" << 
-		"\n   이때 bitset<5>(18)의 5는 결과를 5bit길이로 출력하라는 뜻임" << endl;
+		"\n   이때 bitset<5>(18)의 5는 결과를 5bit길이로 출력하라는 뜻임" << 
+		
+		"\n\n - 이진수 표현으로 integer를 저장"  <<
+		"\n   10010 표현 그대로 입력해서 a라는 변수에 18을 할당하려면 아래와 같이 하면 된다:" << 
+		"\n   ex. int a = 0b10010;" << endl;
 
 	cout << "\n### Binary representation of negative integers ###" <<
 		
@@ -35,7 +39,7 @@ void study_bitwise()
 		"\n   남은 7비트를 활용하자는 데서 착안했다기보단 컴퓨터의 Bit구조를 십분 활용하자는 동기에서 착안된 연산자다. " <<
 		"\n   (무엇보다, 컴퓨터 입장에서는 비트단위 연산이 훨씬 처리하기 편하다-즉, 빠르다)"
 		
-		"\n\n1. Six Bitwise operator" << 
+		"\n\n#1. Six Bitwise operator" << 
 		"\n (1) << : Left Shift\n\
    컴퓨터 입장에서는 비트 정보를 왼쪽으로 n칸 옮기는 작업이지만,\n\
    사람 입장에서는 해당 수를 2의 n제곱배 하는 작업이다.\n\n\
@@ -61,6 +65,23 @@ void study_bitwise()
 		
 		"\n (6) ^ : bitwise XOR\n\
    cout << bitset<4>(a ^ b) << endl; // 1001(하나만 1인 경우 빼곤 전부 0)" << endl;
+
+	cout << "\n#2. Bit Flag" <<
+		"\n - 1바이트 크기의 unsigned object를 이용하면 64(2^8)가지 경우의 수를 나타낼 수 있다." <<
+		"\n   이를 이용해 8가지 binary variable들의 상태를 한번에 통제할 수 있다." <<
+		
+		"\n\n   ex. const unsigned char item1 = 1 << 0 // 0001" <<
+		"\n       const unsigned char item2 = 1 << 1 // 0010" <<
+		"\n       const unsigned char item3 = 1 << 2 // 0100" << 
+		"\n       const unsigned char item4 = 1 << 3 // 1000" <<
+		"\n       unsigned char item_flag = 0b0000" << 
+		
+		"\n\n       item_flag |= item1		 // 0000 | 0001 == 0001" <<
+		"\n       item_flag &= item2		 // 0001 & 0010 == 0000"<<
+		"\n       item_flag |= (item3 | item4)	 // 0000 | 0100 | 1000 == 1100" << 
+		"\n       item_flag &= ~item3		 // 1100 & 1011 == 1000" << 
+		"\n       item_flag & item1		 // 1000 & 0001 == 0000(10진수로 0이면 false이므로 false)" <<
+		"\n       item_flag & item4		 // 1000 & 1000 == 1000(10진수로 0만 아니면 true이므로 true)" << endl;
 
 	cout << "" <<
 		"" <<
