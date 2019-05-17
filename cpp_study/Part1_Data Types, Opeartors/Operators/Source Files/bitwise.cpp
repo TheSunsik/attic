@@ -83,10 +83,18 @@ void study_bitwise()
 		"\n       item_flag & item1		 // 1000 & 0001 == 0000(10진수로 0이면 false이므로 false)" <<
 		"\n       item_flag & item4		 // 1000 & 1000 == 1000(10진수로 0만 아니면 true이므로 true)" << endl;
 
-	cout << "" <<
-		"" <<
-		"" <<
-		"" <<
-		"" << endl;
-
+	cout << "\n#3. Bit Mask" <<
+		"\n - 두 개의 16진수로 8비트를 표현할 수 있다. 그렇기 때문에 한 RGB색상에 대응하는 Hex code는 R, G, B 각각이 " <<
+		"\n   0에서 255의 값을 가지므로(즉, 1바이트로 표현할 수 있으므로) 2 * 3 = 6개의 16진수로 표현되는 것이다." <<
+		"\n   6개의 16진수는 다시 길이가 24인 이진수로 표현되는데, 비트 연산자를 사용해서 이 수가 담고 있는 정보를 추출할 수 있다." <<
+		
+		"\n\n   unsigned int pixel = 0xDAA520;" <<
+		"\n   unsigned int blue_mask = 0b11111111; // 이진수 형식 그대로 값을 할당할 수 있음" <<
+		"\n   unsigned int green_mask = blue_mask << 8;" <<
+		"\n   unsigned int red_mask = green_mask << 8;" <<
+		"\n   cout << std::bitset<24>(pixel) << endl; // 11011010 10100101 00100000이 공백없이 출력됨" <<
+		"\n   " <<
+		"\n   cout << std::bitset<8>((pixel & red_mask) >> 16) << endl; // 11011010 출력" <<
+		"\n   cout << std::bitset<8>((pixel & green_mask) >> 8) << endl; // 10100101 출력" <<
+		"\n   cout << std::bitset<8>(pixel & blue_mask) << endl; // 00100000 출력" << endl;
 }
