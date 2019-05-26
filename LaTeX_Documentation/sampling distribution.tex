@@ -1,0 +1,68 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{paralist}
+\usepackage{amsfonts}
+\usepackage{mathabx}
+
+\title{%
+Sampling Distribution \\
+\large{From Casella\ \&\ Berger textbook}}
+\author{Sunsik Kim}
+\date{}
+
+\begin{document}
+\maketitle
+\noindent When a sample $X_1,...,X_n$ is drawn, some summary of the values is usually computed. Such summary can be understood as output of a function $T:(X_1,...,X_n) \rightarrow Y$, and we call the random variable(or vector) $Y=T(X_1,...,X_n)$ as \textit{statistic}. Since the random sample $X_1,...,X_n$ has a simple probabilistic structure, the distribution of $Y$ is particularly tractable. We call that distribution as \textit{sampling distribution of $Y$}. In this chapter, sampling distribution of two types of statistic are covered. Then the concept on Convergence will be explained, which enables the user to track asymptotic sampling distribution of certain statistic.
+
+\section{Sums of Random Variables}
+$\overline{X}, S^2$ are often used and provide good summaries of the sample. Regardless of the distribution where this samples are drawn, these statistics have nice properties. Let $X_1,...,X_n$ be a random sample from a population with mean $\mu$ and variance $\sigma^2<\infty$. Then:
+\begin{itemize}
+    \item $E\overline{X}=\mu$
+    \item $Var\overline{X}=\sigma^2/n$ 
+    \item $ES^2=\sigma^2$
+\end{itemize}
+We now discuss ways to obtain the distribution of $\overline{X}$. Let $Y=X_1+\cdots +X_n$.
+\begin{enumerate}
+    \item $f_{\overline{X}}(x)=nf_Y(nx)$
+    \item $M_{\overline{X}}(t)=Ee^{t\overline{X}}=Ee^{t(X_1+\cdots +X_n)/n}=M_Y(t/n)$
+\end{enumerate}
+Additionally, if we are sampling from a location-scale family, the sampling distribution $\overline{X}$ is easy to derive. Suppose $X_1,...,X_n$ is a random sample from $(1/\sigma)f((x-\mu)/\sigma)$, a member of a location-scale family. Let $X_i=\sigma Z_i+\mu$. Then $\overline{X}$ and $\overline{Z}$ are related by $\overline{X}=\sigma\overline{Z}+\mu$. Accordingly, if $g(z)$ is the pdf of $\overline{Z}$, then
+
+$$
+f_{\overline{X}}(x)=\displaystyle \frac{1}{\sigma}g_{\overline{Z}}(\frac{x-\mu}{\sigma})
+$$
+
+\noindent is the pdf of $\overline{X}$. This is useful if it is easier to work first with $Z_1,...,Z_n$ and then get the form of $f_{\overline{X}}(x)$.
+
+\section{Order Statistics}
+An i-th order statistic $X_{(i)}$ is a function from $(X_1,...,X_n)$ to the i-th smallest sample. First, we can obtain joint pdf of $X_{(1)},...,X_{(n)}$ using transformation concept. For better illustration, consider the case when n=2 where the support of a sample $X_i(i=1,2)$ is $A=(0,1)$(i.e. support of $(X_1, X_2)$ is $A^2=(0,1)\bigtimes (0,1)$). This square area can be divided into 2! right isosceles triangle of $A_1=\{(X_1, X_2):X_1>X_2\}$ and $A_2=\{(X_1, X_2):X_1<X_2\}$. In $A_1$, $X_{(1)}=X_2$ and $X_{(2)}=X_1$ while opposite holds in $A_2$. This result in:
+
+$$
+f_{X_{(1)}, X_{(2)}}=f_{X_2, X_1}(x_2,x_1)|-1|+f_{X_1, X_2}(x_1,x_2)|1|=\displaystyle \sum_{i=1}^{2!}f_{X_1, X_2}(x_1,x_2)
+$$
+
+\noindent In similar sense, joint pdf of $X_{(1)},...,X_{(n)}$ is obtained as:
+
+$$
+f_{X_{(1)},...,X_{(n)}}(x_1,...x_n)=\displaystyle \sum_{i=1}^{n!}f_{X_1,...,X_n}(x_1,...,x_n)=n!f_X(x_1)\cdots f_X(x_n)
+$$
+
+\noindent Starting from joint pdf above, we can integrate out unnecessary variables to obtain desired pdf on order statistic(s). First, final form of joint pdf of $X_{(j)}, X_{(k)}$ becomes:
+
+$$
+{n\choose j\ k-j\ n-k}\times j\times (k-j)\times [F_x(x_j)]^{j-1}[F_x(x_k)-F_x(x_j)]^{k-j-1}[1-F_x(x_k)]^{n-k}f_X(x_j)f_X(x_k)
+$$
+
+\noindent while marginal pdf of $X_{(k)}$ becomes:
+
+$$
+{n \choose k}\times k\times[F_X(x_k)]^{k-1}[1-F_X(x_k)]^{n-k}f_X(x_k)
+$$
+
+\noindent Above result on marginal distribution of $X_{(k)}$ can be heuristically understood as calculating probability for $X_{(k)}=x$. Among n samples, for $X_{(k)}$ equal $x$, $P(X \leq x)$ and $P(X > x)$ should occur $k, (n-k)$ times respectively. For that, choose $k$ samples among n samples(i.e. n choose k) and pick one sample from that k chosen samples to be labeled as $X_{(k)}$(i.e. k choose 1).
+
+\section{Convergence of a statistic}
+
+\end{document}
+
