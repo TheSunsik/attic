@@ -19,7 +19,7 @@ Classics on Point estimator \\
 \maketitle
 
 \section{Cramer-Rao lower bound}
-MSE of a $T(\textbf{X})$ subject to the $g(\theta)$ can be partitioned into bias and variance of the estimator. Therefore, we look for the estimator whose bias and variance are both low. Classical approach looks for the estimator with lowest variance among the set of unbiased estimators to find best estimator of $g(\theta)$. There exists two main approach for this work. 
+MSE of a $T(\textbf{X})$ subject to the $g(\theta)$ can be partitioned into bias and variance of the estimator. Therefore, we look for the estimator whose bias and variance are both low. Classical approach looks for the estimator with lowest variance among the set of unbiased estimators to find best estimator of $g(\theta)$. There are two main approaches for this work. 
 
 \noindent First of the two is CRLB. This theory provides the lower bound of variance of an unbiased estimator of $g(\theta)$. Therefore, if the variance of an unbiased estimator $T(\textbf{X})$ equals to the lower bound provided  by this theorem, then we can conclude that $T(\textbf{X})$ is the best unbiased estimator of $g(\theta)$(i.e. MVUE of $g(\theta)$).
 
@@ -32,7 +32,7 @@ The score indicates the sensitivity of likelihood function with respect to $\the
 
 \noindent \textbf{Fisher information}\ \ \ We define Fisher information $I(\theta)$ as the variance of score function. By applying simple mathematics, we can show:
 $$
-I(\theta)=Var\displaystyle\frac{\partial}{\partial\theta}\log L(\theta;\textbf{X})=-E\displaystyle\frac{\partial^2}{\partial\theta^2}\log L(\theta;\textbf{X})
+I(\theta)=Var\ V(\theta, \textbf{X})=-E\displaystyle\frac{\partial^2}{\partial\theta^2}\log L(\theta;\textbf{X})
 $$
 
 \subsection{Cramer-Rao lower bound(CRLB)}
@@ -45,7 +45,7 @@ $). Corollary below gives convenient way to attain the MVUE of $g(\theta)$ based
 
 \textbf{Corollary 7.3.15 (Attainment)} If $T(\textbf{X})$ is any unbiased estimator of $g(\theta)$, then $T(\textbf{X})$ attains the CRLB if and only if
 $$
-\displaystyle \frac{\partial}{\partial\theta}\log L(\theta;\textbf{X})=h(\theta)[T(\textbf{X})-g(\theta)]
+V(\theta, \textbf{X})=h(\theta)[T(\textbf{X})-g(\theta)]
 $$
 for some function $h(\theta)$.\bigskip
 
